@@ -1,0 +1,13 @@
+{
+    "geminicodeassist.codeGenerationPaneViewEnabled": true,
+    "cloudcode.apigee.gemini.options": {
+        
+        "enterpriseContext": {
+            "enabled": true,
+            "includeMetadata": true,
+            "includeSecurity": true,
+            "includeSchema": true
+        },
+        "enableRemoteMockServer": true
+    }
+}

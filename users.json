@@ -1,0 +1,20 @@
+[
+    {
+        "full_name": "admin",
+        "email": "admin@ikarrental.hu",
+        "password": "$2y$10$8Kc2HDhMR8\/GqEX0VHKQ4ucf.2ELi1OiyPbwNkDAhC18BJr1M2Kv2",
+        "admin_status": true
+    },
+    {
+        "full_name": "Amir",
+        "email": "amir@gmail.com",
+        "password": "$2y$10$Jk.Dq6RMWWTIpaCeij2XMuztdMbk5AFngUo4s7s3.nnFuzdjmPWt2",
+        "admin_status": false
+    },
+    {
+        "full_name": "Jack",
+        "email": "jack@gmail.com",
+        "password": "$2y$10$ON0p5ZSJ\/EFFLDTYYQdO8Oe8b81J395ip5Oz7awHVGwwA0Dy9bpSi",
+        "admin_status": false
+    }
+]

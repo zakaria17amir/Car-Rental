@@ -1,0 +1,21 @@
+[
+    {
+        "car_id": "2",
+        "user_email": "amir@gmail.com",
+        "rent_start": "2025-01-14",
+        "rent_end": "2025-01-23"
+    },
+    {
+        "car_id": "6",
+        "user_email": "amir@gmail.com",
+        "rent_start": "2025-01-14",
+        "rent_end": "2025-01-23"
+    },
+    [],
+    {
+        "car_id": "1",
+        "user_email": "amir@gmail.com",
+        "rent_start": "2025-01-22",
+        "rent_end": "2025-01-25"
+    }
+]
