@@ -70,8 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body >
-<header>
+<body>
+    <header>
         <nav>
             <div class="navbar bg-base-100">
                 <div class="flex-1">
@@ -99,8 +99,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <?php if (isset($_SESSION['user'])): ?>
                                 <li><a class="justify-between"><?= $_SESSION['user']['full_name'] ?></a></li>
-                                <li><a href="profile.php">Profile</a></li>
-                                <li><a href="settings.php">Settings</a></li>
+                                <?php $profileLink = $_SESSION['user']['admin_status'] ? "admin_profile.php" : "user_profile.php"; ?>
+                                <li><a href="<?= $profileLink ?>">Profile</a></li>
+                                <li><a href="#">Settings</a></li>
                                 <li><a href="logout.php">Logout</a></li>
                             <?php else: ?>
                                 <li><a href="login.php">Login</a></li>
@@ -112,64 +113,67 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </nav>
     </header>
     <div class="bg-gray-700 flex justify-center items-center min-h-screen">
-    <div class="card font-semibold w-full text-black max-w-xl bg-blue-400  p-6">
-        <h2 class="text-center text-2xl font-semibold mb-4">Registration</h2>
-        <form action="registration.php" method="post">
+        <div class="card font-semibold w-full text-black max-w-xl bg-blue-400  p-6">
+            <h2 class="text-center text-2xl font-semibold mb-4">Registration</h2>
+            <form action="registration.php" method="post">
 
-            <!-- Name Field -->
-            <div>
-                <label for="full_name" class="block text-white">Full Name</label>
-                <input type="text" id="full_name" name="full_name" placeholder="Enter your full name" class="input input-bordered w-full text-white bg-gray-800 placeholder-gray-400" />
-            </div>
+                <!-- Name Field -->
+                <div>
+                    <label for="full_name" class="block text-white">Full Name</label>
+                    <input type="text" id="full_name" name="full_name" placeholder="Enter your full name" class="input input-bordered w-full text-white bg-gray-800 placeholder-gray-400" />
+                </div>
 
-            <!-- Email Field -->
-            <div>
-                <label for="email" class="block text-white">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" class="input input-bordered w-full text-white bg-gray-800 placeholder-gray-400" />
-            </div>
+                <!-- Email Field -->
+                <div>
+                    <label for="email" class="block text-white">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" class="input input-bordered w-full text-white bg-gray-800 placeholder-gray-400" />
+                </div>
 
-            <div>
-                <label for="password" class="block text-white">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" class="input input-bordered w-full text-white bg-gray-800 placeholder-gray-400" />
-            </div>
+                <div>
+                    <label for="password" class="block text-white">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" class="input input-bordered w-full text-white bg-gray-800 placeholder-gray-400" />
+                </div>
 
-            <div>
-                <label for="confirm_password" class="block text-white">Confirm Password</label>
-                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" class="input input-bordered w-full text-white bg-gray-800 placeholder-gray-400" />
-            </div>
+                <div>
+                    <label for="confirm_password" class="block text-white">Confirm Password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" class="input input-bordered w-full text-white bg-gray-800 placeholder-gray-400" />
+                </div>
 
 
-            <!-- Submit Button -->
-            <div>
-                <button type="submit" class="bg-green btn btn-accent w-full">Register</button>
-            </div>
+                <!-- Submit Button -->
+                <div>
+                    <button type="submit" class="bg-green btn btn-accent w-full">Register</button>
+                </div>
 
-        </form>
-        <?php
+            </form>
+            <?php
 
-        if (!empty($errors)) { // Display error messages here
-            foreach ($errors as $error) {
-                echo "<p class='text-red-500'>" . $error . "</p>";
+            if (!empty($errors)) { // Display error messages here
+                foreach ($errors as $error) {
+                    echo "<p class='text-red-500'>" . $error . "</p>";
+                }
             }
-        }
-        ?>
-        <?php if ($success): ?>
-            <div role="alert" class="alert alert-success">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6 shrink-0 stroke-current"
-                    fill="none"
-                    viewBox="0 0 24 24">
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>Registration Successful!</span>
-            </div>
-        <?php endif; ?>
-    </div></div>
+            ?>
+            <?php if ($success): ?>
+                <div role="alert" class="alert alert-success">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 shrink-0 stroke-current"
+                        fill="none"
+                        viewBox="0 0 24 24">
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Registration Successful!</span>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+
+
 </body>
 
 </html>

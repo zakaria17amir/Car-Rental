@@ -6,10 +6,10 @@ $cars = $cars_storage->load();
 $bookings_storage = new JsonIO('bookings.json'); // Initialize bookings storage
 $bookings = $bookings_storage->load() ?: [];
 
-
+$car = null;
 if (isset($_GET['id'])) {
     $car_id = $_GET['id'];
-    $car = null;
+
 
     foreach ($cars as $c) {
         if ($c['id'] == $car_id) {
@@ -22,10 +22,10 @@ if (isset($_GET['id'])) {
 }
 
 $min_booking_date = date('Y-m-d');
-// if ($car['is_rented']) {
-//     $rent_end_plus_two = date('Y-m-d', strtotime($car['rent_end'] . ' + 2 days'));
-//     $min_booking_date = max($min_booking_date, $rent_end_plus_two);
-// }
+if ($car['is_rented']) {
+    $rent_end_date = date('Y-m-d', strtotime($car['rent_end']));
+    $min_booking_date = max($min_booking_date, $rent_end_date);
+}
 $max_booking_date = date('Y-m-d', strtotime($min_booking_date . ' + 30 days'));
 
 $booking_error = "";
@@ -139,8 +139,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <?php if (isset($_SESSION['user'])): ?>
                                 <li><a class="justify-between"><?= $_SESSION['user']['full_name'] ?></a></li>
-                                <li><a href="profile.php">Profile</a></li>
-                                <li><a href="settings.php">Settings</a></li>
+                                <?php $profileLink = $_SESSION['user']['admin_status'] ? "admin_profile.php" : "user_profile.php"; ?>
+                                <li><a href="<?= $profileLink ?>">Profile</a></li>
+                                <li><a href="#">Settings</a></li>
                                 <li><a href="logout.php">Logout</a></li>
                             <?php else: ?>
                                 <li><a href="login.php">Login</a></li>

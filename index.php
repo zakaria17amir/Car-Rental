@@ -13,7 +13,7 @@ $cars = $cars_storage->load();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Details</title>
+    <title>Home Page</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -48,8 +48,9 @@ $cars = $cars_storage->load();
                             class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <?php if (isset($_SESSION['user'])): ?>
                                 <li><a class="justify-between"><?= $_SESSION['user']['full_name'] ?></a></li>
-                                <li><a href="profile.php">Profile</a></li>
-                                <li><a href="settings.php">Settings</a></li>
+                                <?php $profileLink = $_SESSION['user']['admin_status'] ? "admin_profile.php" : "user_profile.php"; ?>
+                                <li><a href="<?= $profileLink ?>">Profile</a></li>
+                                <li><a href="#">Settings</a></li>
                                 <li><a href="logout.php">Logout</a></li>
                             <?php else: ?>
                                 <li><a href="login.php">Login</a></li>
@@ -60,12 +61,8 @@ $cars = $cars_storage->load();
             </div>
         </nav>
     </header>
-    <h1>Home Page</h1>
-    <p><a href="add_car.php">Add Car"></a></p>
-    <p><a href="login.php">Login</a></p>
-    <p><a href="registration.php">Register</a></p>
-    <p><a href="profile.php">Profile"></a></p>
-    <form action="" method="get" class="mb-4"> <!-- Form now uses GET -->
+    
+    <form action="" method="get" class="mb-4"> 
         <div class="grid grid-cols-2 gap-4">
             <div>
                 <label for="seats" class="block">Seats:</label>
@@ -103,7 +100,7 @@ $cars = $cars_storage->load();
     </form>
     <div class="grid grid-cols-3 gap-4">
         <?php
-        $filtered_cars = $cars; // Start with all cars
+        $filtered_cars = $cars; 
 
         // Apply filters if present in $_GET
         if (!empty($_GET)) {
@@ -120,24 +117,24 @@ $cars = $cars_storage->load();
             });
         }
 
-        foreach ($filtered_cars as $car) : ?>
-            <a href="car_details.php?id=<?= $car['id'] ?>">
-                <div class="card card-compact bg-base-100 w-96 shadow-xl">
-                    <figure><img src="<?= $car['image'] ?>" alt="<?= $car['brand'] . ' ' . $car['model'] ?>" /></figure>
-                    <div class="card-body">
-                        <h2 class="card-title"><?= $car['brand'] . ' ' . $car['model'] ?></h2>
-                        <p>
-                            Seats: <?= $car['passengers'] ?><br>
-                            Transmission: <?= $car['transmission'] ?><br>
-                            Price: <span class="text-xl font-bold"><?= $car['daily_price_huf'] ?> HUF/day</span>
-                        </p>
-                        <div class="card-actions justify-end">
-                            <button class="btn btn-primary">Rent Now</button>
+            foreach ($filtered_cars as $car) : ?>
+                <a href="car_details.php?id=<?= $car['id'] ?>">
+                    <div class="card card-compact bg-base-100 w-96 shadow-xl">
+                        <figure><img src="<?= $car['image'] ?>" alt="<?= $car['brand'] . ' ' . $car['model'] ?>" /></figure>
+                        <div class="card-body">
+                            <h2 class="card-title"><?= $car['brand'] . ' ' . $car['model'] ?></h2>
+                            <p>
+                                Seats: <?= $car['passengers'] ?><br>
+                                Transmission: <?= $car['transmission'] ?><br>
+                                Price: <span class="text-xl font-bold"><?= $car['daily_price_huf'] ?> HUF/day</span>
+                            </p>
+                            <div class="card-actions justify-end">
+                                <button class="btn btn-primary">Rent Now</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
-        <?php endforeach; ?>
+                </a>
+            <?php endforeach; ?>
     </div>
 </body>
 

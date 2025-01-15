@@ -17,7 +17,7 @@ $booking_error = isset($_GET['error']) ? urldecode($_GET['error']) : "An unknown
 </head>
 
 <body>
-    <header>
+<header>
         <nav>
             <div class="navbar bg-base-100">
                 <div class="flex-1">
@@ -45,8 +45,9 @@ $booking_error = isset($_GET['error']) ? urldecode($_GET['error']) : "An unknown
                             class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <?php if (isset($_SESSION['user'])): ?>
                                 <li><a class="justify-between"><?= $_SESSION['user']['full_name'] ?></a></li>
-                                <li><a href="profile.php">Profile</a></li>
-                                <li><a href="settings.php">Settings</a></li>
+                                <?php $profileLink = $_SESSION['user']['admin_status'] ? "admin_profile.php" : "user_profile.php"; ?>
+                                <li><a href="<?= $profileLink ?>">Profile</a></li>
+                                <li><a href="#">Settings</a></li>
                                 <li><a href="logout.php">Logout</a></li>
                             <?php else: ?>
                                 <li><a href="login.php">Login</a></li>
@@ -73,6 +74,11 @@ $booking_error = isset($_GET['error']) ? urldecode($_GET['error']) : "An unknown
         <span>Sorry Booking failed <br>
             <?= $booking_error ?> </span>
     </div>
+
+    <div class="mt-4">  
+     <a href="index.php" class="btn btn-primary">Back to Homepage</a> </div>
+
+
 
 </body>
 

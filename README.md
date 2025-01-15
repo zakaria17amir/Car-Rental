@@ -22,12 +22,12 @@ ELTE Academic and Examination Regulations, Faculty of Informatics Special Provis
 - [x] 2.0 points Car Details Page: able to book a car for specific dates, with successful bookings saved 
 - [x] 1.0 point Car Details Page: users are notified of successful or failed bookings; in case of success, booking details and car attributes are displayed 
 - [x] 1.0 point Homepage: filters include date ranges for availability 
-- [ ] 1.0 point Profile Page: displays the user’s past bookings 
-- [ ] 1.0 point Admin: logged-in admin’s profile page shows all bookings, with the option to delete them 
-- [ ] 1.0 point Admin: able to modify car data with error handling 
-- [ ] 1.0 point Admin: able to delete cars 
-- [ ] 2.0 points Design: polished, mobile-friendly appearance 
+- [x] 1.0 point Profile Page: displays the user’s past bookings 
+- [x] 1.0 point Admin: logged-in admin’s profile page shows all bookings, with the option to delete them 
+- [x] 1.0 point Admin: able to modify car data with error handling 
+- [x] 1.0 point Admin: able to delete cars 
+- [x] 2.0 points Design: polished, mobile-friendly appearance 
 
 ### Bonus Tasks (max 5 points) 
-- [ ] 3.0 points Booking: only available dates can be selected, e.g., displayed in a calendar view 
+- [x] 3.0 points Booking: only available dates can be selected, e.g., displayed in a calendar view 
 - [ ] 2.0 points AJAX: booking confirmation and feedback are handled via AJAX, without redirecting to a new page; instead, a custom modal (not an alert) is displayed without refreshing the page.

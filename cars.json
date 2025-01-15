@@ -1,17 +1,17 @@
 [
     {
         "id": 1,
-        "brand": "Honda",
+        "brand": "honda",
         "model": "Civic",
-        "year": 2019,
+        "year": "2006",
         "transmission": "Manual",
-        "fuel_type": "Petrol",
-        "passengers": 5,
-        "daily_price_huf": 16250,
+        "fuel_type": "diesel",
+        "passengers": "4",
+        "daily_price_huf": "23131",
         "image": "https:\/\/media.ed.edmunds-media.com\/honda\/civic\/2019\/oem\/2019_honda_civic_sedan_touring_fq_oem_1_815.jpg",
         "is_rented": true,
-        "rent_start": "2025-01-22",
-        "rent_end": "2025-01-25"
+        "rent_start": "2025-01-14",
+        "rent_end": "2025-01-22"
     },
     {
         "id": 2,
@@ -37,9 +37,9 @@
         "passengers": 5,
         "daily_price_huf": 13000,
         "image": "https:\/\/media.ed.edmunds-media.com\/volkswagen\/jetta\/2025\/oem\/2025_volkswagen_jetta_sedan_sel_fq_oem_1_815.jpg",
-        "is_rented": false,
-        "rent_start": null,
-        "rent_end": null
+        "is_rented": true,
+        "rent_start": "2025-01-23",
+        "rent_end": "2025-01-29"
     },
     {
         "id": 4,
@@ -79,9 +79,9 @@
         "passengers": 5,
         "daily_price_huf": 45000,
         "image": "https:\/\/media.ed.edmunds-media.com\/tesla\/model-s\/2021\/oem\/2021_tesla_model-s_sedan_plaid_fq_oem_1_815.jpg",
-        "is_rented": false,
-        "rent_start": null,
-        "rent_end": null
+        "is_rented": true,
+        "rent_start": "2025-01-14",
+        "rent_end": "2025-01-23"
     },
     {
         "id": 7,

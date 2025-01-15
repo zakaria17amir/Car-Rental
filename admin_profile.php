@@ -7,17 +7,8 @@ $cars_storage = new JsonIO('cars.json');
 $cars = $cars_storage->load();
 $bookings_storage = new JsonIO('bookings.json');
 $bookings = $bookings_storage->load();
-$user_bookings = [];
 
-if (isset($_SESSION['user'])) {
-    $user_email = $_SESSION['user']['email'];
 
-    foreach ($bookings as $booking) {
-        if ($booking['user_email'] == $user_email) {
-            $user_bookings[] = $booking;
-        }
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +17,7 @@ if (isset($_SESSION['user'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
+    <title>Admin Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -40,6 +31,7 @@ if (isset($_SESSION['user'])) {
                 </div>
                 <div class="flex-none gap-2">
                     <ul class="menu menu-horizontal px-1 text-black font-semibold">
+                        <li><a class="bg-yellow-300" href="add_car.php">Add Car</a></li>
                         <?php if (isset($_SESSION['user'])): ?>
                             <li><a class="bg-yellow-300" href="logout.php">Logout</a></li>
                         <?php else: ?>
@@ -87,13 +79,18 @@ if (isset($_SESSION['user'])) {
             <p><?php echo $_SESSION['user']['email']; ?></p>
         </div>
     </div>
+    <div>
+        <h2 class="text-4xl font-bold mb-4 text-center text-yellow-300">Bookings</h2>
+    </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <?php foreach ($user_bookings as $booking): ?>
+
+        <?php foreach ($bookings as $index => $booking): ?>
             <?php
             $booked_car = null;
-            foreach ($cars as $car) {
+            foreach ($cars as $car_index => $car) { // Added $car_index for updating cars array
                 if ($car['id'] == $booking['car_id']) {
                     $booked_car = $car;
+                    $car_array_index = $car_index; // Save the index in $cars array
                     break;
                 }
             }
@@ -106,11 +103,52 @@ if (isset($_SESSION['user'])) {
                         <p>Seats: <?= $booked_car['passengers'] ?></p>
                         <p>Transmission: <?= $booked_car['transmission'] ?></p>
                         <p class="text-xl ">
-                            Booking Period:  <?= $booking['rent_start'] ?> to <?= $booking['rent_end'] ?>
+                            Booking Period: <?= $booking['rent_start'] ?> to <?= $booking['rent_end'] ?>
                         </p>
+                        <div class="card-actions justify-end">
+                            <form action="delete_booking.php" method="post">
+                                <input type="hidden" name="delete_booking" value="<?= $index ?>">
+                                <input type="hidden" name="car_index" value="<?= $car_array_index ?>">
+                                <button type="submit" class="btn btn-error">Delete booking</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+
+
+    <div>
+        <h2 class="text-4xl font-bold mb-4 text-center text-green-400"><br><br><br>
+            Cars</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+        <?php foreach ($cars as $car_index => $car) : ?>
+
+            <div class="card card-compact bg-base-100 w-96 shadow-xl">
+                <figure><img src="<?= $car['image'] ?>" alt="<?= $car['brand'] . ' ' . $car['model'] ?>" /></figure>
+                <div class="card-body">
+                    <h2 class="card-title"><?= $car['brand'] . ' ' . $car['model'] ?></h2>
+                    <p>
+                        Seats: <?= $car['passengers'] ?><br>
+                        Transmission: <?= $car['transmission'] ?><br>
+                        Price: <span class="text-xl font-bold"><?= $car['daily_price_huf'] ?> HUF/day</span>
+                    </p>
+                    <div class="card-actions justify-end">
+                        <form action="edit_car.php" method="get">
+                            <input type="hidden" name="edit_car" value="<?=$car_index?>">
+                            <button type="submit" class="btn btn-primary">Edit Car</button>
+                        </form>
+                        <form action="delete_car.php" method="post">
+                            <input type="hidden" name="delete_car" value="<?= $car_index ?>">
+                            <button type="submit" class="btn btn-error">Delete Car</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
         <?php endforeach; ?>
     </div>
 

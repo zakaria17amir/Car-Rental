@@ -28,7 +28,7 @@ function validate_login($input)
                         'full_name' => $user['full_name'],
                         'admin_status' => $user['admin_status']
                     ];
-                    return []; 
+                    return [];
                 } else {
                     $errors["mismatch"] = "Invalid email or password";
                 }
@@ -92,8 +92,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <?php if (isset($_SESSION['user'])): ?>
                                 <li><a class="justify-between"><?= $_SESSION['user']['full_name'] ?></a></li>
-                                <li><a href="profile.php">Profile</a></li>
-                                <li><a href="settings.php">Settings</a></li>
+                                <?php $profileLink = $_SESSION['user']['admin_status'] ? "admin_profile.php" : "user_profile.php"; ?>
+                                <li><a href="<?= $profileLink ?>">Profile</a></li>
+                                <li><a href="#">Settings</a></li>
                                 <li><a href="logout.php">Logout</a></li>
                             <?php else: ?>
                                 <li><a href="login.php">Login</a></li>
@@ -147,6 +148,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
 
     </div>
+
+
 
 
 
